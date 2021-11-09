@@ -8,7 +8,7 @@ import { useState } from "react";
 
 import logo from '../../assets/logo.svg';
 import restaurant from '../../assets/restaurant.png';
-import { Card } from "../../components";
+import { Card, RestaurantCard } from "../../components";
 
 
 export const Home = ()=>{
@@ -48,6 +48,7 @@ export const Home = ()=>{
                         <Card photo={restaurant} title='Nome do Restaurante'/>
                     </Carousel>
                 </Search>
+                <RestaurantCard/>
             </Container>
             <Map />
         </Wrapper>
