@@ -8,13 +8,15 @@ import { useState } from "react";
 
 import logo from '../../assets/logo.svg';
 import restaurant from '../../assets/restaurant.png';
-import { Card, RestaurantCard } from "../../components";
+import { Card, Modal, RestaurantCard } from "../../components";
+
 
 
 export const Home = ()=>{
 
     const [inputValue, setInputValue] = useState('');
-    
+    const [modalOpenned, setModalOpenned] = useState(false);
+
     //carousel
     const settings = {
         dots: false,
@@ -51,6 +53,7 @@ export const Home = ()=>{
                 <RestaurantCard/>
             </Container>
             <Map />
+            <Modal open={modalOpenned} onClose={()=>setModalOpenned(!modalOpenned)} />
         </Wrapper>
     )
 }
