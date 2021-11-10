@@ -34,6 +34,12 @@ margin-bottom: 15px;
 // width: 500px;
 // `;
 
+export const Carousel = styled(Slider)`
+.slick-slide{
+    margin-right: 30px;
+}
+`;
+
 export const CarouselTitle = styled.h1`
  font-family: ${(props)=>props.theme.font.regular};
  color: ${(props)=>props.theme.color.text};
@@ -44,8 +50,3 @@ export const CarouselTitle = styled.h1`
  align-self: flex-start;
 `;
 
-export const Carousel = styled(Slider)`
-.slick-slide{
-    margin-right: 16px;
-}
-`;
