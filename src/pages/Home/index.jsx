@@ -1,14 +1,16 @@
-import React from "react";
+import { useState } from "react";
+import { useSelector } from "react-redux";
 import { Carousel, CarouselTitle, Container, Logo, Search, Wrapper } from "./style";
 import TextField, { Input } from "@material/react-text-field";
 import MaterialIcon from '@material/react-material-icon';
 import 'slick-carousel/slick/slick.css';
 import "slick-carousel/slick/slick-theme.css";
-import { useState } from "react";
+
 
 import logo from '../../assets/logo.svg';
-import restaurant from '../../assets/restaurant.png';
+import restaurantImg from '../../assets/restaurant.png';
 import { Card, Modal, RestaurantCard, Map } from "../../components";
+
 
 
 
@@ -18,6 +20,7 @@ export const Home = ()=>{
     const [inputValue, setInputValue] = useState('');
     const [query, setQuery]= useState(null);
     const [modalOpenned, setModalOpenned] = useState(false);
+    const { restaurants } = useSelector((state)=>state.restaurants);
 
     //carousel
     const settings = {
@@ -52,14 +55,12 @@ export const Home = ()=>{
                     </TextField>
                     <CarouselTitle>Na sua Área</CarouselTitle>
                     <Carousel {...settings}>
-                        <Card photo={restaurant} title='Nome do Restaurante'/>
-                        <Card photo={restaurant} title='Nome do Restaurante'/>
-                        <Card photo={restaurant} title='Nome do Restaurante'/>
-                        <Card photo={restaurant} title='Nome do Restaurante'/>
-                        <Card photo={restaurant} title='Nome do Restaurante'/>
-                        <Card photo={restaurant} title='Nome do Restaurante'/>
+                        {restaurants.map((restaurant)=><Card key={restaurant.place_id} photo={photos ? restaurant.photos[0].getUrl() : restaurantImg} title={restaurant.name} />)}
                     </Carousel>
                 </Search>
+                {restaurants.map((restaurant)=>(
+                <RestaurantCard restaurant={restaurant}/>
+                ))}
                 <RestaurantCard/>
             </Container>
             <Map query={query}/>
