@@ -18,6 +18,6 @@ height: ${(props)=>props.height};
 animation: ${keyframeLoading} 500ms infinite alternative;
 `;
 
-export default ({ width, height }) => {
+export default function Skeleton ({ width, height }) {
     <LoadingSkeleton width={width} height={height}/>
 }

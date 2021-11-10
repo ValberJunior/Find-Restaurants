@@ -1,27 +1,29 @@
-import { Address, Restaurant, RestaurantInfo, RestaurantPoster, Title } from "./style";
-import ReactStars from "react-rating-stars-component"; 
-import restaurantImg from '../../assets/restaurant.png';
-import { useState } from "react";
-import Skeleton from '../Skeleton';
+import React, { useState } from 'react';
+import ReactStars from 'react-rating-stars-component';
 
-export const RestaurantCard = ({ restaurant , onClick })=>{
+import { Restaurant, RestaurantInfo, Content, RestaurantPhoto } from './styles';
+import Text from '../Text';
+import ImageSkeleton from '../ImageSkeleton';
 
-    const [imageLoaded, setImageLoaded] = useState(false);
+const ResturantCard = ({ restaurant, onClick }) => {
+  const [imageLoaded, setImageLoaded] = useState(false);
 
-
-    return(
-        <Restaurant onClick={onClick}>
-            <RestaurantInfo>
-                <Title>{ restaurant.name }</Title>
-                <ReactStars count={5} isHalf value={restaurant.rating} edit={false} activeColor='#e7711c'/>
-                <Address>{restaurant.vicinity || restaurant.formatted_address}</Address>
-            </RestaurantInfo>
-            <RestaurantPoster 
-            imageLoaded={imageLoaded}
-            src={restaurant.photos? restaurant.photos[0].getUrl() : restaurantImg } 
-            alt='Restaurant Image'
-            onload={()=>setImageLoaded(true)}/>
-            {!imageLoaded && <Skeleton width='100px' heigth='100px'/>}
-        </Restaurant>
-    );
+  return (
+    <Restaurant onClick={onClick}>
+      <RestaurantInfo>
+        <Text size="large">{restaurant.name}</Text>
+        <ReactStars count={5} value={restaurant.rating} edit={false} isHalf activeColor="#e7711c" />
+        <Content size="medium">{restaurant.formatted_address || restaurant.vicinity}</Content>
+      </RestaurantInfo>
+      <RestaurantPhoto
+        imageLoaded={imageLoaded}
+        onLoad={() => setImageLoaded(true)}
+        src={restaurant.photos ? restaurant.photos[0].getUrl() : restaurant.icon}
+        alt="foto do restaurante"
+      />
+      {!imageLoaded && <ImageSkeleton width="100px" height="100px" />}
+    </Restaurant>
+  );
 };
+
+export default ResturantCard;
