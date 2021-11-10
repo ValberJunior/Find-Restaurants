@@ -9,7 +9,7 @@ import "slick-carousel/slick/slick-theme.css";
 
 import logo from '../../assets/logo.svg';
 import restaurantImg from '../../assets/restaurant.png';
-import { Card, Modal, RestaurantCard, Map , Loader } from "../../components";
+import { Card, Modal, RestaurantCard, Map , Loader, Skeleton } from "../../components";
 
 
 
@@ -76,11 +76,15 @@ export const Home = ()=>{
             </Container>
             <Map query={query} placeId={placeId} />
             <Modal open={modalOpenned} onClose={()=>setModalOpenned(!modalOpenned)}>
+            {restaurantSelected?(<>
             <ModalTitle>{restaurantSelected?.name}</ModalTitle>
             <ModalContent>{restaurantSelected?.formatted_phone_number}</ModalContent>
             <ModalContent>{restaurantSelected?.formatted_adress}</ModalContent>
             <ModalContent>{restaurantSelected?.opening_hours?.open_now?'Aberto Agora :)':
             'Fechado Agora :('}</ModalContent>
+            </>) : (<>
+            <Skeleton width="10px" height="10px"/>
+            </>)}
             </Modal>
         </Wrapper>
     )
