@@ -16,6 +16,7 @@ import { Card, Modal, RestaurantCard, Map } from "../../components";
 export const Home = ()=>{
 
     const [inputValue, setInputValue] = useState('');
+    const [query, setQuery]= useState(null);
     const [modalOpenned, setModalOpenned] = useState(false);
 
     //carousel
@@ -28,6 +29,13 @@ export const Home = ()=>{
         adaptiveHeight: true,
     };
 
+    //searchBar
+    function handleKeyPress(e){
+        if(e.key === 'Enter'){
+            setQuery(inputValue);
+        }
+    }
+
     return(
         <Wrapper>
             <Container>
@@ -39,6 +47,7 @@ export const Home = ()=>{
                     trailingIcon={<MaterialIcon role="button" icon="search"/>}
                     ><Input
                     value={inputValue}
+                    onKeyPress={handleKeyPress}
                     onChange={(e)=>{setInputValue(e.target.value)}} />
                     </TextField>
                     <CarouselTitle>Na sua Área</CarouselTitle>
@@ -53,7 +62,7 @@ export const Home = ()=>{
                 </Search>
                 <RestaurantCard/>
             </Container>
-            <Map/>
+            <Map query={query}/>
             <Modal open={modalOpenned} onClose={()=>setModalOpenned(!modalOpenned)} />
         </Wrapper>
     )
