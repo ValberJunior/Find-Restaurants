@@ -1,5 +1,5 @@
 import React from "react";
-import { Carousel, CarouselTitle, Container, Logo, Map, Search, Wrapper } from "./style";
+import { Carousel, CarouselTitle, Container, Logo, Search, Wrapper } from "./style";
 import TextField, { Input } from "@material/react-text-field";
 import MaterialIcon from '@material/react-material-icon';
 import 'slick-carousel/slick/slick.css';
@@ -8,7 +8,8 @@ import { useState } from "react";
 
 import logo from '../../assets/logo.svg';
 import restaurant from '../../assets/restaurant.png';
-import { Card, Modal, RestaurantCard } from "../../components";
+import { Card, Modal, RestaurantCard, Map } from "../../components";
+
 
 
 
@@ -52,7 +53,7 @@ export const Home = ()=>{
                 </Search>
                 <RestaurantCard/>
             </Container>
-            <Map />
+            <Map/>
             <Modal open={modalOpenned} onClose={()=>setModalOpenned(!modalOpenned)} />
         </Wrapper>
     )

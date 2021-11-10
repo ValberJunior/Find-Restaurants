@@ -29,10 +29,10 @@ export const Logo = styled.img`
 margin-bottom: 15px;
 `;
 
-export const Map = styled.div`
-background-color: red;
-width: 500px;
-`;
+// export const Map = styled.div`
+// background-color: red;
+// width: 500px;
+// `;
 
 export const CarouselTitle = styled.h1`
  font-family: ${(props)=>props.theme.font.regular};
