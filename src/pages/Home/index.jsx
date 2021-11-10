@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { useSelector } from "react-redux";
-import { Carousel, CarouselTitle, Container, Logo, Search, Wrapper } from "./style";
+import { Carousel, CarouselTitle, Container, Logo, ModalContent, ModalTitle, Search, Wrapper } from "./style";
 import TextField, { Input } from "@material/react-text-field";
 import MaterialIcon from '@material/react-material-icon';
 import 'slick-carousel/slick/slick.css';
@@ -19,8 +19,9 @@ export const Home = ()=>{
 
     const [inputValue, setInputValue] = useState('');
     const [query, setQuery]= useState(null);
+    const [placeId, setPlaceId] = useState(null);
     const [modalOpenned, setModalOpenned] = useState(false);
-    const { restaurants } = useSelector((state)=>state.restaurants);
+    const { restaurants, restaurantSelected } = useSelector((state)=>state.restaurants);
 
     //carousel
     const settings = {
@@ -40,6 +41,12 @@ export const Home = ()=>{
         }
     }
 
+    //modal
+    function handleOpenModal(placeId){
+        setPlaceId(placeId);
+        setModalOpenned(true);
+    }
+
     return(
         <Wrapper>
             <Container>
@@ -56,16 +63,22 @@ export const Home = ()=>{
                     </TextField>
                     <CarouselTitle>Na sua Área</CarouselTitle>
                     <Carousel {...settings}>
-                        {restaurants.map((restaurant)=><Card key={restaurant.place_id} photo={photos ? restaurant.photos[0].getUrl() : restaurantImg} title={restaurant.name} />)}
+                        {restaurants.map((restaurant)=>{<Card key={restaurant.place_id} photo={photos ? restaurant.photos[0].getUrl() : restaurantImg} title={restaurant.name} />})}
                     </Carousel>
                 </Search>
                 {restaurants.map((restaurant)=>(
-                <RestaurantCard restaurant={restaurant}/>
+                <RestaurantCard onCLick={()=>handleOpenModal(restaurant.place_id)} restaurant={restaurant}/>
                 ))}
                 <RestaurantCard/>
             </Container>
-            <Map query={query}/>
-            <Modal open={modalOpenned} onClose={()=>setModalOpenned(!modalOpenned)} />
+            <Map query={query} placeId={placeId} />
+            <Modal open={modalOpenned} onClose={()=>setModalOpenned(!modalOpenned)}>
+            <ModalTitle>{restaurantSelected?.name}</ModalTitle>
+            <ModalContent>{restaurantSelected?.formatted_phone_number}</ModalContent>
+            <ModalContent>{restaurantSelected?.formatted_adress}</ModalContent>
+            <ModalContent>{restaurantSelected?.opening_hours?.open_now?'Aberto Agora :)':
+            'Fechado Agora :('}</ModalContent>
+            </Modal>
         </Wrapper>
     )
 }

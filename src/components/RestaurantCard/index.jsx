@@ -2,9 +2,9 @@ import { Address, Restaurant, RestaurantInfo, RestaurantPoster, Title } from "./
 import ReactStars from "react-rating-stars-component"; 
 import restaurantImg from '../../assets/restaurant.png';
 
-export const RestaurantCard = ({ restaurant })=>{
+export const RestaurantCard = ({ restaurant , onClick })=>{
     return(
-        <Restaurant>
+        <Restaurant onClick={onClick}>
             <RestaurantInfo>
                 <Title>{ restaurant.name }</Title>
                 <ReactStars count={5} isHalf value={restaurant.rating} edit={false} activeColor='#e7711c'/>
