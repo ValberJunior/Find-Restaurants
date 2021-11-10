@@ -3,12 +3,18 @@ import { Reset } from "styled-reset";
 import { Home } from "./pages";
 import theme from "./themes";
 
+//Redux
+import { Provider } from "react-redux";
+import store from './redux/store';
+
 function App() {
   return (
-    <ThemeProvider theme={theme}>
-      <Reset/> 
-      <Home/>
-    </ThemeProvider>
+    <Provider store={store}>
+      <ThemeProvider theme={theme}>
+        <Reset/> 
+        <Home/>
+      </ThemeProvider>
+    </Provider>
   );
 }
 
