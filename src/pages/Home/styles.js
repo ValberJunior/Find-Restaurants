@@ -1,6 +1,5 @@
 import styled from 'styled-components';
 import Slider from 'react-slick';
-import { Input } from '@material/react-text-field';
 
 import { Text } from '../../components';
 
