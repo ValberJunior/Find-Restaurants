@@ -9,7 +9,7 @@ import "slick-carousel/slick/slick-theme.css";
 
 import logo from '../../assets/logo.svg';
 import restaurantImg from '../../assets/restaurant.png';
-import { Card, Modal, RestaurantCard, Map } from "../../components";
+import { Card, Modal, RestaurantCard, Map , Loader } from "../../components";
 
 
 
@@ -61,10 +61,13 @@ export const Home = ()=>{
                     onKeyPress={handleKeyPress}
                     onChange={(e)=>{setInputValue(e.target.value)}} />
                     </TextField>
+                    {restaurants.lenght > 0 ?
+                    (<>
                     <CarouselTitle>Na sua Área</CarouselTitle>
                     <Carousel {...settings}>
                         {restaurants.map((restaurant)=>{<Card key={restaurant.place_id} photo={photos ? restaurant.photos[0].getUrl() : restaurantImg} title={restaurant.name} />})}
                     </Carousel>
+                    </>) : (<Loader/>)}
                 </Search>
                 {restaurants.map((restaurant)=>(
                 <RestaurantCard onCLick={()=>handleOpenModal(restaurant.place_id)} restaurant={restaurant}/>
